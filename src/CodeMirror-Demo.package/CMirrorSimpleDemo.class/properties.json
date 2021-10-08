@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CMirrorAbstractDemo",
+	"category" : "CodeMirror-Demo",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CMirrorSimpleDemo",
+	"type" : "normal"
+}

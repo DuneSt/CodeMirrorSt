@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "WAComponent",
+	"category" : "CodeMirror-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"code",
+		"language",
+		"waitingMessage",
+		"timeBeforeSaveOnStopTyping",
+		"saveOnLooseFocus",
+		"saveCallback"
+	],
+	"name" : "CMirrorComponent",
+	"type" : "normal"
+}

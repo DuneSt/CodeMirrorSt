@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GitBridge",
+	"category" : "CodeMirror-Dev",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "GitCodeMirror",
+	"type" : "normal"
+}

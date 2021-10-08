@@ -1,0 +1,3 @@
+fileLibraryHelper
+filesDirectory
+	^ GitCodeMirror resources
