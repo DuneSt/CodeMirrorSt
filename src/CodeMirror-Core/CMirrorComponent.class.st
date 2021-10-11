@@ -12,6 +12,11 @@ Class {
 	#category : #'CodeMirror-Core'
 }
 
+{ #category : #'As yet unclassified' }
+CMirrorComponent class >> ajaxInitScript [
+ ^ 'CMirrorBinding.initEditors()' js
+]
+
 { #category : #accessing }
 CMirrorComponent >> code [
 	^ code
