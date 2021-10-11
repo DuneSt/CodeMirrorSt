@@ -12,12 +12,12 @@ CMirrorDemoRoot class >> initialize [
 	"WAAdmin applicationDefaults removeParent: WADevelopmentConfiguration instance."
 	(WAAdmin register: self asApplicationAt: 'CodeMirrorEditorDemo')
 		addLibrary: JQDeploymentLibrary;
-		addLibrary: CMirrorFileLibrary   
+		addLibrary: CMirrorLibrary    
 ]
 
 { #category : #'class initialization' }
 CMirrorDemoRoot class >> version [
-	^ 'v0.0.1'
+	^ 'v1.0.0'
 ]
 
 { #category : #accessing }
@@ -42,8 +42,7 @@ CMirrorDemoRoot >> renderContentOn: html [
 		class: 'cmirror-demo';
 		with: [ self renderDemoListOn: html.
 			(html tag: 'main')
-				with: [ html div: 'Note: We''re not affiliated with Medium.com'.
-					html div
+				with: [ html div
 						class: 'cmirror-demo-page';
 						with: [ html render: self currentDemo ] ] ]
 ]
@@ -77,7 +76,7 @@ CMirrorDemoRoot >> style [
 	font-family: ''Roboto'',''Helvetica'',''Arial'', sans-serif;
 }
 	
-.meditor-demo{
+.cmirror-demo{
 	display: flex;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -86,14 +85,14 @@ CMirrorDemoRoot >> style [
 	width: 100%;
 }
 
-.meditor-demo-list{
+.cmirror-demo-list{
 	width: 225px;
 	height: 100%;
 	background-color: #FFF;
 	box-shadow: 0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
 }
 
-.meditor-demo-list ul{
+.cmirror-demo-list ul{
 	padding-left: 0;
 	font-size: 14px;
 	line-height: 24px;
@@ -101,14 +100,14 @@ CMirrorDemoRoot >> style [
 	letter-spacing: 0;
 }
 
-.meditor-demo-list li{
+.cmirror-demo-list li{
 	-webkit-transition: all 450ms cubic-bezier(.23, 1, .32, 1) 0ms;
 	transition: all 450ms cubic-bezier(.23, 1, .32, 1) 0ms;
 	width: 100%;
 	line-height: 0;
 }
 
-.meditor-demo-list li a{
+.cmirror-demo-list li a{
 	padding-left: 15px;
 	font-size: 16px;
 	font-weight: inherit;
@@ -119,27 +118,27 @@ CMirrorDemoRoot >> style [
 	cursor: pointer;
 }
 
-.meditor-demo-list li a:hover{
+.cmirror-demo-list li a:hover{
 	background-color: #eee;
 }
 
-.meditor-demo-list li a span{
+.cmirror-demo-list li a span{
 	line-height: 60px;
 }
 
-.meditor-demo-list-item_active{
+.cmirror-demo-list-item_active{
 	background-color: rgba(206,147,216 ,1);
 }
 
-.meditor-demo-list li.meditor-demo-list-item_active a:hover{
+.cmirror-demo-list li.cmirror-demo-list-item_active a:hover{
 	background-color: rgba(186,104,200 ,1);
 }
 
-.meditor-demo-list li.meditor-demo-list-item_active a{
+.cmirror-demo-list li.cmirror-demo-list-item_active a{
 	color: #FFF;
 }
 
-.meditor-demo main{
+.cmirror-demo main{
 	display: inline-block;
 	-webkit-flex-grow: 1;
 	-ms-flex-positive: 1;
@@ -147,17 +146,17 @@ CMirrorDemoRoot >> style [
 	overflow: auto;
 }
 
-.meditor-demo-page{
+.cmirror-demo-page{
 	padding: 16px;
 }
 
-.meditor-demo-page-title{
+.cmirror-demo-page-title{
 	margin-bottom: 60px;
 	margin-left: 32px;
 	text-align: justify;
 }
 
-.meditor-demo-page-title h3{
+.cmirror-demo-page-title h3{
 	font-size: 16px;
 	font-weight: 600;
 	margin-top: 80px;
@@ -166,14 +165,14 @@ CMirrorDemoRoot >> style [
 	line-height: 40px;
 }
 
-.meditor-demo-page-title p{	
+.cmirror-demo-page-title p{	
 	margin-top: 16px;
 	margin-bottom: 16px;
 	font-size: 13px;
 	max-width: 640px;
 }
 
-.meditor-demo-snippet-group{
+.cmirror-demo-snippet-group{
 	width: 100%;
 	overflow: hidden;
 	display: flex;
@@ -182,20 +181,20 @@ CMirrorDemoRoot >> style [
 	flex-direction: column;
 }
 
-.meditor-demo-snippet-demo pre, .meditor-demo .minimap-container{
+.cmirror-demo-snippet-demo-code pre, .cmirror-demo .minimap-container{
 	height: 400px;
 	box-shadow: 0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
 	margin-bottom: 50px;
 }
 
-.meditor-demo pre{
+.cmirror-demo pre{
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-.meditor-demo .minimap-container pre{
+.cmirror-demo .minimap-container pre{
 	width: initial;
 }
 '

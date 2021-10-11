@@ -15,6 +15,13 @@ CMirrorLanguage class >> java [
 ]
 
 { #category : #'as yet unclassified' }
+CMirrorLanguage class >> javascript [
+	^ self new
+		name: #javascript;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 CMirrorLanguage class >> markdown [
 	^ self new
 		name: #markdown;
