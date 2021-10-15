@@ -37,8 +37,7 @@ CMirrorLibrary >> CodeMirrorBindingJs [
     }
   }
 
-  getContentFor(saveButtonElement) {
-    let containerElement = saveButtonElement.parentElement
+  getContentFor(containerElement) {
     let editor = this.editorsMaps.get(containerElement)
     if(editor) {
       return editor.getValue()
@@ -47,20 +46,33 @@ CMirrorLibrary >> CodeMirrorBindingJs [
     }
   }
 
-  static save(saveButtonElement) {
+  static getValue(containerElement) {
+    CMirrorBinding.getInstance().getContentFor(containerElement)
+  }
+
+  static save(id) {
     document.body.style.cursor = "progress"
-    saveButtonElement.style.cursor = "not-allowed"
-    return CMirrorBinding.getInstance().getContentFor(saveButtonElement)
+    let saveButtonElement = document.getElementById(id +"-save")
+    if(saveButtonElement){
+      saveButtonElement.style.cursor = "not-allowed"
+    }
+    return CMirrorBinding.getInstance().getContentFor(document.getElementById(id))
   }
 
-  static saveCompleted(saveButtonElement) {
+  static saveCompleted(id) {
     document.body.style.cursor = "default"
-    saveButtonElement.style.cursor = "default"
+    let saveButtonElement = document.getElementById(id +"-save")
+    if(saveButtonElement) {
+      saveButtonElement.style.cursor = "default"
+    }
   }
 
-  static saveFailed(saveButtonElement) {
+  static saveFailed(id) {
     document.body.style.cursor = "default"
-    saveButtonElement.style.cursor = "default"
+    let saveButtonElement = document.getElementById(id +"-save")
+    if(saveButtonElement) {
+      saveButtonElement.style.cursor = "default"
+    }
   }
 }
 
@@ -20732,6 +20744,21 @@ CodeMirror.defineMIME("message/http", "http");
 
 });
 '
+]
+
+{ #category : #images }
+CMirrorLibrary >> iconmonstrsave3Svg [
+	^ '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.004 3h2.996v5h-2.996v-5zm8.996 1v20h-24v-24h20l4 4zm-19 5h14v-7h-14v7zm16 4h-18v9h18v-9zm-2 2h-14v1h14v-1zm0 2h-14v1h14v-1zm0 2h-14v1h14v-1z"/></svg>'
+]
+
+{ #category : #images }
+CMirrorLibrary >> iconmonstrview13Svg [
+	^ '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 1h11v2h-11v-2zm0 7h11v-2h-11v2zm0 5h11v-2h-11v2zm0 5h11v-2h-11v2zm0 5h11v-2h-11v2zm13 0h11v-22h-11v22z"/></svg>'
+]
+
+{ #category : #images }
+CMirrorLibrary >> iconmonstrview1Svg [
+	^ '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 3h-24v-2h24v2zm0 3h-24v2h24v-2zm0 5h-24v2h24v-2zm0 5h-24v2h24v-2zm0 5h-24v2h24v-2z"/></svg>'
 ]
 
 { #category : #'languages-modes' }

@@ -5,9 +5,7 @@ Class {
 		'code',
 		'language',
 		'waitingMessage',
-		'timeBeforeSaveOnStopTyping',
-		'saveOnLooseFocus',
-		'saveCallback'
+		'GraphicalsActions'
 	],
 	#category : #'CodeMirror-Core'
 }
@@ -15,6 +13,27 @@ Class {
 { #category : #'As yet unclassified' }
 CMirrorComponent class >> ajaxInitScript [
  ^ 'CMirrorBinding.initEditors()' js
+]
+
+{ #category : #accessing }
+CMirrorComponent >> addCallback: aCallbackBlock onComplete: jsOnCompleteScript withIcon: icon [
+	self graphicalsActions
+		add:
+			(CMirrorAdvancedCallBackIcon new
+				icon: icon;
+				block: aCallbackBlock;
+				onCompleteJs: jsOnCompleteScript;
+				yourself)
+]
+
+{ #category : #accessing }
+CMirrorComponent >> addCallback: aCallbackBlock withIcon: icon [
+	self graphicalsActions
+		add:
+			(CMirrorSimpleCallBackIcon new
+				icon: icon;
+				block: aCallbackBlock;
+				yourself)
 ]
 
 { #category : #accessing }
@@ -43,6 +62,11 @@ CMirrorComponent >> defaultWaitingHtml [
 ]
 
 { #category : #accessing }
+CMirrorComponent >> graphicalsActions [
+	^ GraphicalsActions ifNil: [ GraphicalsActions := OrderedCollection new ]
+]
+
+{ #category : #accessing }
 CMirrorComponent >> language [
 	^ language ifNil:[ language:= CMirrorLanguage markdown]
 ]
@@ -54,12 +78,13 @@ CMirrorComponent >> language: anObject [
 
 { #category : #accessing }
 CMirrorComponent >> renderContentOn: html [
-	| component |
+	| component id |
+	id := html nextId.
 	html div
-		id: html nextId;
+		id: id;
 		class: 'cmirror-container';
 		style: 'position: relative';
-		with: [ self renderSaveButton: html.
+		with: [ self renderGraphicalsActionsOn: html forEditorId: id.
 			component := html div
 				class: 'cmirror-container-editor';
 				style: 'width:100%;height:600px;border:1px solid grey;';
@@ -71,35 +96,23 @@ CMirrorComponent >> renderContentOn: html [
 ]
 
 { #category : #accessing }
-CMirrorComponent >> renderSaveButton: html [
-	self saveCallback
-		ifNotNil: [ html image
-				style:
-					'height: 25px;width: 25px;position: absolute;top: 5px;right: 10px;z-index: 10;';
-				url: (MonacoFileLibrary urlOf: 'saveIconSvg');
-				onClick: (self saveJSScript: html) ]
-]
-
-{ #category : #accessing }
-CMirrorComponent >> saveCallback [
-	^ saveCallback
+CMirrorComponent >> renderGraphicalsActionsOn: html forEditorId: id [
+	self graphicalsActions
+		doWithIndex: [ :action :index | 
+			action
+				id: id;
+				position: index;
+				renderContentOn: html ]
 ]
 
 { #category : #accessing }
 CMirrorComponent >> saveCallback: aBlock [
-	saveCallback := aBlock
+	self addCallback: aBlock withIcon: (CMirrorLibrary urlOf: 'iconmonstrsave3Svg')
 ]
 
-{ #category : #accessing }
-CMirrorComponent >> saveJSScript: html [
-	|ajax|
-	ajax := html jQuery ajax.
-	^ ajax
-		type: 'POST';
-		callback:  self saveCallback
-		value: (JSStream on: 'CMirrorBinding.save(event.target)');
-		onComplete: 'CMirrorBinding.saveCompleted(event.target)';
-		onError: 'CMirrorBinding.saveFailed(event.target)'
+{ #category : #Toolkit }
+CMirrorComponent >> text: aString [
+	self code: aString
 ]
 
 { #category : #accessing }
