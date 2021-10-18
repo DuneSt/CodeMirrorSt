@@ -29,8 +29,7 @@ class CMirrorBinding {
     }
   }
 
-  getContentFor(saveButtonElement) {
-    let containerElement = saveButtonElement.parentElement
+  getContentFor(containerElement) {
     let editor = this.editorsMaps.get(containerElement)
     if(editor) {
       return editor.getValue()
@@ -39,20 +38,33 @@ class CMirrorBinding {
     }
   }
 
-  static save(saveButtonElement) {
+  static getValue(containerElement) {
+    CMirrorBinding.getInstance().getContentFor(containerElement)
+  }
+
+  static save(id) {
     document.body.style.cursor = "progress"
-    saveButtonElement.style.cursor = "not-allowed"
-    return CMirrorBinding.getInstance().getContentFor(saveButtonElement)
+    let saveButtonElement = document.getElementById(id +"-save")
+    if(saveButtonElement){
+      saveButtonElement.style.cursor = "not-allowed"
+    }
+    return CMirrorBinding.getInstance().getContentFor(document.getElementById(id))
   }
 
-  static saveCompleted(saveButtonElement) {
+  static saveCompleted(id) {
     document.body.style.cursor = "default"
-    saveButtonElement.style.cursor = "default"
+    let saveButtonElement = document.getElementById(id +"-save")
+    if(saveButtonElement) {
+      saveButtonElement.style.cursor = "default"
+    }
   }
 
-  static saveFailed(saveButtonElement) {
+  static saveFailed(id) {
     document.body.style.cursor = "default"
-    saveButtonElement.style.cursor = "default"
+    let saveButtonElement = document.getElementById(id +"-save")
+    if(saveButtonElement) {
+      saveButtonElement.style.cursor = "default"
+    }
   }
 }
 
