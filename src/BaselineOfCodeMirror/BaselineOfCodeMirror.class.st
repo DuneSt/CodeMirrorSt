@@ -19,7 +19,7 @@ BaselineOfCodeMirror >> baseline: spec [
 			spec
 				package: 'CodeMirror-Core' with: [ spec requires: #('Seaside3') ];
 				package: 'CodeMirror-Dev'
-					with: [ spec requires: #('CodeMirror-Core' 'gitBrigde' 'FileLibraryHelper') ];
+					with: [ spec requires: #('CodeMirror-Core' 'GitBridge' 'FileLibraryHelper') ];
 				package: 'CodeMirror-Demo'
 					with: [ spec requires: #('CodeMirror-Core') ].
 					
