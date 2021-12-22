@@ -54,7 +54,7 @@ CMirrorComponent >> defaultWaitingHtml [
 		with: [ 
 					html image
 						style: 'height: 50px; width: 50px;';
-						url: (MonacoFileLibrary urlOf: 'cog.gif').
+						url: (CMirrorLibrary urlOf: 'cog.gif').
 					html heading
 						level1;
 						with: 'Please wait, loading in progress' ];
